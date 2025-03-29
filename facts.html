@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Facts</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg" href="images/favicon.svg">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="logo">
+                    <h1>SwirlScoop</h1>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="flavors.html">Flavors</a></li>
+                    <li><a href="brands.html">Brands</a></li>
+                    <li><a href="facts.html" class="active">Fun Facts</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <section class="facts-hero">
+        <h1>Ice Cream Facts</h1>
+        <div class="random-fact-container">
+            <p id="random-fact" class="random-fact">Loading a delicious ice cream fact...</p>
+        </div>
+        <button id="new-fact-btn" class="btn new-fact-btn">Show Another Fact</button>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        const iceCreamFacts = [
+            "The average American consumes approximately 23 pounds of ice cream per year.",
+            "It takes about 50 licks to finish a single scoop of ice cream.",
+            "The world's tallest ice cream cone was over 9 feet tall!",
+            "Vanilla is the most popular ice cream flavor, accounting for about 30% of all ice cream sales.",
+            "The first ice cream cone was invented at the 1904 World's Fair in St. Louis.",
+            "Sunday is the most popular day to eat ice cream.",
+            "One cow can produce enough milk for about 9,000 gallons of ice cream in its lifetime.",
+            "The first commercial ice cream was sold in New York City in 1776.",
+            "The biggest ice cream sundae ever made weighed over 24 tons.",
+            "The ice cream sundae was invented when it became illegal to sell ice cream sodas on Sundays in the late 1800s.",
+            "Brain freeze occurs when cold ice cream touches the roof of your mouth, causing blood vessels in your head to dilate.",
+            "Chocolate syrup is the world's most popular ice cream topping.",
+            "In the early days, ice cream was only enjoyed by the elite because ice was expensive and difficult to store.",
+            "The waffle cone was invented when an ice cream vendor ran out of dishes and a nearby waffle vendor offered his waffles.",
+            "Italy has the highest ice cream consumption per capita in the world.",
+            "The first ice cream parlor in America opened in New York City in 1776.",
+            "About 9% of all milk produced in the U.S. is used to make ice cream.",
+            "President George Washington spent approximately $200 for ice cream during the summer of 1790—equivalent to thousands of dollars today.",
+            "The most popular day of the week for ice cream is Sunday.",
+            "Hawaii is home to some of the strangest ice cream flavors, including flavors like squid ink, horse meat, and octopus."
+        ];
+
+        function displayRandomFact() {            
+            const factElement = document.getElementById('random-fact');
+            const randomIndex = Math.floor(Math.random() * iceCreamFacts.length);
+            factElement.textContent = iceCreamFacts[randomIndex];
+            factElement.style.opacity = 0;
+            setTimeout(() => {
+                factElement.style.opacity = 1;
+            }, 100);
+        }
+        window.addEventListener('load', displayRandomFact);
+        document.getElementById('new-fact-btn').addEventListener('click', displayRandomFact);
+    </script>
+</body>
+</html> 
