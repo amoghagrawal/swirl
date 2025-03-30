@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     loadFooter();
+    initMusicControl();
 });
 
 window.addEventListener('scroll', function() {
@@ -28,6 +29,48 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+function initMusicControl() {
+    createMusicControl();
+    
+    const musicOn = localStorage.getItem('musicOn') === 'true';
+    
+    if (!window.bgMusic) {
+        window.bgMusic = new Audio('../sounds/background-music.mp3');
+        window.bgMusic.loop = true;
+        window.bgMusic.volume = 0.3;
+    }
+    
+    updateMusicState(musicOn);
+}
+
+function createMusicControl() {
+    const musicControl = document.createElement('div');
+    musicControl.className = 'music-control';
+    musicControl.innerHTML = '<button id="toggle-music">🔇 Music Off</button>';
+    document.body.appendChild(musicControl);
+    
+    document.getElementById('toggle-music').addEventListener('click', function() {
+        const currentState = localStorage.getItem('musicOn') === 'true';
+        updateMusicState(!currentState);
+    });
+}
+
+function updateMusicState(musicOn) {
+    localStorage.setItem('musicOn', musicOn);
+    
+    const musicButton = document.getElementById('toggle-music');
+    
+    if (musicOn) {
+        window.bgMusic.play();
+        musicButton.innerHTML = '🎵 Music On';
+        musicButton.classList.add('music-on');
+    } else {
+        window.bgMusic.pause();
+        musicButton.innerHTML = '🔇 Music Off';
+        musicButton.classList.remove('music-on');
+    }
+}
 
 function loadFooter() {
     fetch('footer.html')
